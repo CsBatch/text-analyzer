@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 export default function Form(props) {
 
     const handleUpClick = () => {
-        let numOfWords = text.split(" ").length;
+        let numOfWords = text.split(/\s+/).filter((element)=>{return element.length!==0}).length;
         setWords(numOfWords);
 
         let numOfDigit = text.replace(/\D/g, '').length;
@@ -43,10 +43,10 @@ export default function Form(props) {
             <div className="container pt-3">
                 <div className="mb-3">
                     <label htmlFor="myBox" className="form-label"><h1>{props.heading}</h1></label>
-                    <textarea className={`form-control shadow bg-${props.mode} p-2 text-${props.mode==="light"?"dark":"light"}`} value={text} onChange={handleOnChange} id="myBox" rows="10" placeholder='Enter you text here!'></textarea>
+                    <textarea className={`form-control shadow bg-${props.mode} p-2 text-${props.mode==="light"?"dark":"light"}`} value={text} onChange={handleOnChange} id="myBox" rows="6" placeholder='Enter you text here!'></textarea>
                 </div>
-                <button className="btn btn-primary" onClick={handleUpClick}>Analyze</button>
-                <button className="btn btn-danger mx-3" onClick={handleResetClick}>Clear</button>
+                <button className="btn btn-primary" onClick={handleUpClick} disabled= {text.length===0}>Analyze</button>
+                <button className="btn btn-danger mx-3" onClick={handleResetClick} disabled= {text.length===0}>Clear</button>
             </div>
 
             <div className="container my-3">
